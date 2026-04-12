@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Admin Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SheetJS for Excel Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            background-color: #f8fafc;
+        }
+
+        .admin-hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+        }
+
+        .admin-card {
+            background: white;
+            color: #333;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin-top: 2rem;
+        }
+
+        .auth-buttons {
+            display: none !important;
+        }
+
+        /* Hide default auth buttons in nav */
+    </style>
+</head>
+
+<body class="admin-portal">
+
+    <!-- Header -->
+    <header style="background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+        <div class="container navbar">
+            <a href="newindex.html" class="logo" style="color: #1e293b;">PRIME <span
+                    style="font-weight: 300; font-size: 0.8em; color: var(--primary-color);">ADMIN</span></a>
+            <a href="newindex.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back to Site</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="admin-hero">
+        <i class="fas fa-shield-alt" style="font-size: 4rem; margin-bottom: 1rem; color: var(--primary-color);"></i>
+        <h1>Admin Portal</h1>
+        <p>Manage users, properties, and bookings securely.</p>
+
+        <div class="admin-card">
+            <h3>Login to Dashboard</h3>
+            <p style="margin-bottom: 1.5rem; color: #64748b;">Access your administrative tools.</p>
+            <button class="btn btn-primary" style="width: 100%;" onclick="toggleForm('signin-admin')">Admin
+                Login</button>
+            <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;"
+                onclick="toggleForm('signup-admin')">Register New Admin</button>
+        </div>
+    </div>
+
+    <!-- Modals (Reused from Index but only Admin ones) -->
+
+    <!-- Admin Sign In Modal -->
+    <div class="modal-overlay" id="signin-admin-modal" style="z-index: 3000;">
+        <div class="modal" style="max-width: 400px; border-top: 4px solid var(--primary-color);">
+            <div class="modal-header">
+                <h2>Admin Login</h2>
+                <button class="close-modal" onclick="closeAuthModals()">&times;</button>
+            </div>
+            <form onsubmit="handleAdminLogin(event)">
+                <div class="form-group">
+                    <label>Admin Email</label>
+                    <input type="email" id="login-admin-email" class="form-control" placeholder="admin@prime.in"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="login-admin-password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Access Dashboard</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem;">
+                Register as Admin? <a href="#" onclick="toggleForm('signup-admin')"
+                    style="color: var(--secondary-color);">Click here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Admin Sign Up Modal -->
+    <div class="modal-overlay" id="signup-admin-modal" style="z-index: 3000;">
+        <div class="modal" style="max-width: 400px; border-top: 4px solid var(--primary-color);">
+            <div class="modal-header">
+                <h2>Admin Registration</h2>
+                <button class="close-modal" onclick="closeAuthModals()">&times;</button>
+            </div>
+            <form onsubmit="handleAdminSignup(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="signup-admin-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="signup-admin-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signup-admin-password" class="form-control" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Register Admin</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem;">
+                <a href="#" onclick="toggleForm('signin-admin')" style="color: var(--secondary-color);">Back to
+                    Login</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Dashboard Modal (Hidden by default, used by app.js) -->
+    <div class="modal-overlay" id="dashboard-modal" style="z-index: 2500;">
+        <div class="modal" style="max-width: 1000px; width: 95%; padding: 0;">
+            <div class="dashboard-container">
+                <!-- Sidebar -->
+                <div class="dashboard-sidebar">
+                    <div
+                        style="text-align: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                        <div class="profile-avatar-large" id="dashboard-avatar"
+                            style="width: 80px; height: 80px; margin: 0 auto 10px; font-size: 2rem;"></div>
+                        <h3 id="dashboard-name-display" style="font-size: 1.1rem; margin-bottom: 0.25rem;">Admin</h3>
+                        <p id="dashboard-email-display" style="font-size: 0.85rem; color: var(--text-light);">
+                            admin@prime.in</p>
+                    </div>
+
+                    <button class="dashboard-tab active" onclick="switchTab('profile')"><i
+                            class="fas fa-user-circle"></i> Profile</button>
+                    <!-- Admin Tabs (Always correct for admin page) -->
+                    <button class="dashboard-tab" id="admin-users-tab" onclick="switchTab('admin-users')"><i
+                            class="fas fa-users-cog"></i> Manage Users</button>
+                    <button class="dashboard-tab" id="admin-bookings-tab" onclick="switchTab('admin-bookings')"><i
+                            class="fas fa-file-excel"></i> Excel Bookings</button>
+
+                    <button class="dashboard-tab" onclick="handleLogout()" style="margin-top: auto; color: #ef4444;"><i
+                            class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+
+                <!-- Content Area -->
+                <div class="dashboard-content">
+                    <div id="dynamic-tab-title"
+                        style="margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                        <h3 id="dynamic-tab-title-text">Excel Booking Reports</h3>
+                    </div>
+
+                    <!-- Profile Panel -->
+                    <div id="tab-profile" class="dashboard-panel active">
+                        <div style="text-align:center; padding: 2rem;">
+                            <h3>Welcome, Admin</h3>
+                            <p>Select "Manage Users" or "Transactions" to begin.</p>
+                        </div>
+                    </div>
+
+                    <!-- Admin Users Panel -->
+                    <div id="tab-admin-users" class="dashboard-panel">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: #f1f5f9; text-align: left;">
+                                    <th style="padding: 10px;">User</th>
+                                    <th style="padding: 10px;">Email</th>
+                                    <th style="padding: 10px;">Status</th>
+                                    <th style="padding: 10px;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-users-list"></tbody>
+                        </table>
+                    </div>
+
+                    <!-- Admin Bookings Panel -->
+                    <div id="tab-admin-bookings" class="dashboard-panel">
+                        <div style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
+                            <button class="btn btn-primary" onclick="exportAllBookingsToExcel()"
+                                style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                                <i class="fas fa-file-excel"></i> Export All to Excel
+                            </button>
+                        </div>
+                        <div id="admin-all-bookings-list" class="bookings-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="js/app.js"></script>
+    <script src="js/admin.js"></script>
+    <script>
+        // Auto-check for admin title
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user && user.role === 'admin') {
+                // Open dashboard if already logged in
+                // We need to wait for app.js to load
+                setTimeout(() => openDashboard(), 500);
+            }
+        });
+    </script>
+</body>
+
+</html>

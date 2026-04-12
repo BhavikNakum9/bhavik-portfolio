@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Property View | Prime Properties</title>
+    <!-- Pannellum for 360 views -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+
+        #panorama {
+            width: 100%;
+            height: 100%;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            text-align: center;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            background: white;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: sans-serif;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <a href="javascript:window.close()" class="back-btn">Close View</a>
+    <div id="panorama"></div>
+    <div class="controls">
+        <h3 id="prop-title" style="margin: 0; font-size: 1.2rem;">Property View</h3>
+        <p style="margin: 5px 0 0; font-size: 0.8rem; opacity: 0.8;">Click and drag to explore</p>
+    </div>
+
+    <script>
+        // Get params
+        const urlParams = new URLSearchParams(window.location.search);
+        const imgUrl = urlParams.get('image');
+        const title = urlParams.get('title');
+
+        if (title) document.getElementById('prop-title').textContent = title;
+
+        if (imgUrl) {
+            pannellum.viewer('panorama', {
+                "type": "equirectangular",
+                "panorama": imgUrl,
+                "autoLoad": true,
+                "autoRotate": -2,
+                "compass": true,
+                // Since most user images won't be true 360, we cheat a bit
+                // This will stretch standard images but gives the "3D" effect requested
+                "hfov": 100,
+                "vaov": 60, // Limit vertical angle to avoid black holes on top/bottom for non-360 images
+                "vOffset": 0,
+            });
+        } else {
+            document.getElementById('panorama').innerHTML = '<div style="color:white; text-align:center; padding-top:20%;">No Image Loaded</div>';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhavik Nakum | Flutter & Frontend Developer</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Sora:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="particles-js" style="position: fixed; width: 100vw; height: 100vh; top: 0; left: 0; z-index: -1;"></div>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo code-logo">
+                <span class="logo-bracket">&lt;</span>Bhavik<span class="logo-accent">Nakum</span><span
+                    class="logo-bracket">/&gt;</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#about"><i class="fas fa-user-astronaut"></i> About</a></li>
+                <li><a href="#skills"><i class="fas fa-laptop-code"></i> Skills</a></li>
+                <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
+                <li><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+                <li><a href="#declaration"><i class="fas fa-check-circle"></i> Declaration</a></li>
+                <li><a href="#contact"><i class="fas fa-paper-plane"></i> Contact</a></li>
+            </ul>
+            <div class="menu-btn"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home" class="hero section active">
+            <div class="container hero-content">
+                <div class="hero-image">
+                    <div class="avatar-ring"></div>
+                    <img src="assets/images/bhavik.jpg" alt="Bhavik Nakum Profile Photo" class="avatar">
+                </div>
+                <div class="hero-text">
+                    <h1 class="hero-name">Bhavik Nakum</h1>
+                    <div class="typing-container">
+                        <span id="typing-text"></span><span class="cursor">|</span>
+                    </div>
+                    <p class="intro">
+                        Computer Engineering student passionate about building modern mobile applications
+                        and interactive web interfaces using Flutter and frontend technologies.
+                    </p>
+                    <div class="hero-btns">
+                        <a href="#projects" class="btn btn-primary">View Projects</a>
+                        <a href="resume/Final-Resume.pdf" class="btn btn-secondary resume-btn"
+                            download="Final-Resume.pdf">Download Resume</a>
+                        <a href="#contact" class="btn btn-outline">Contact Me</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-main-card glass-card" data-tilt data-tilt-max="10" data-tilt-speed="400"
+                    data-tilt-perspective="1000">
+                    <div class="about-description">
+                        <p>
+                            I am a passionate Computer Engineering student with a strong interest in mobile and web
+                            application development. I enjoy building modern, user-friendly digital products using
+                            <span class="text-accent">Flutter</span> and <span class="text-accent">frontend
+                                technologies</span>.
+                        </p>
+                        <p>
+                            I am continuously learning new tools and development practices to improve my technical
+                            skills
+                            and create efficient, scalable solutions. My goal is to start my career as a
+                            <span class="text-accent">Flutter Mobile Application Developer</span> or
+                            <span class="text-accent">Frontend Web Developer</span> where I can contribute to
+                            real-world projects, collaborate with teams, and grow as a professional developer.
+                        </p>
+                    </div>
+                </div>
+                <div class="about-grid">
+                    <div class="glass-card about-card" data-tilt data-tilt-max="15" data-tilt-speed="400"
+                        data-tilt-perspective="1000">
+                        <h3>My Passion</h3>
+                        <p>I love turning complex problems into simple, beautiful, and intuitive designs. My focus is on
+                            writing clean, efficient, and well-documented code.</p>
+                    </div>
+                    <div class="glass-card about-card">
+                        <h3>Mindset</h3>
+                        <p>Quick learner with a growth mindset, always staying updated with the latest trends in the
+                            developer ecosystem.</p>
+                    </div>
+                </div>
+                <div class="dashboard-header">
+                    <h3 class="dashboard-title"><i class="fas fa-chart-line"></i> Dashboard Stats</h3>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-num" data-val="1">1</span>+
+                        <p>Projects</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num" data-val="4">4</span>+
+                        <p>Technologies</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num" data-val="100">100</span>%
+                        <p>Learning progress</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="container">
+                <h2 class="section-title">Technical Skills</h2>
+
+                <div class="skills-grid">
+                    <!-- Programming & Frameworks -->
+                    <div class="skills-category-card glass-card" data-tilt data-tilt-max="15" data-tilt-speed="400"
+                        data-tilt-perspective="1000">
+                        <div class="category-header">
+                            <i class="fas fa-terminal"></i>
+                            <h3>Programming & Frameworks</h3>
+                        </div>
+                        <div class="skills-list">
+                            <a href="https://dart.dev/" target="_blank" class="skill-item">
+                                <i class="fas fa-code"></i>
+                                <span>Dart (Flutter – Beginner to Intermediate)</span>
+                            </a>
+                            <a href="https://www.java.com/" target="_blank" class="skill-item">
+                                <i class="fab fa-java"></i>
+                                <span>Java (Basic)</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Mobile & Web Development -->
+                    <div class="skills-category-card glass-card">
+                        <div class="category-header">
+                            <i class="fas fa-laptop-code"></i>
+                            <h3>Mobile & Web Development</h3>
+                        </div>
+                        <div class="skills-list">
+                            <a href="https://flutter.dev/" target="_blank" class="skill-item">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>Flutter (UI, Widgets, layouts)</span>
+                            </a>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank"
+                                class="skill-item">
+                                <i class="fab fa-html5"></i>
+                                <span>HTML5</span>
+                            </a>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank"
+                                class="skill-item">
+                                <i class="fab fa-css3-alt"></i>
+                                <span>CSS3 (Responsive design)</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Tools & Technologies -->
+                    <div class="skills-category-card glass-card">
+                        <div class="category-header">
+                            <i class="fas fa-tools"></i>
+                            <h3>Tools & Technologies</h3>
+                        </div>
+                        <div class="skills-list">
+                            <a href="https://developer.android.com/studio" target="_blank" class="skill-item">
+                                <i class="fab fa-android"></i>
+                                <span>Android Studio</span>
+                            </a>
+                            <a href="https://code.visualstudio.com/" target="_blank" class="skill-item">
+                                <i class="fas fa-file-code"></i>
+                                <span>VS Code</span>
+                            </a>
+                            <a href="https://www.mysql.com/" target="_blank" class="skill-item">
+                                <i class="fas fa-database"></i>
+                                <span>MySQL (Basic)</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="projects-grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 900px; margin: 0 auto;">
+                    <!-- Project 1 -->
+                    <div class="glass-card project-card" data-tilt data-tilt-max="10" data-tilt-speed="400"
+                        data-tilt-perspective="1000">
+                        <div class="project-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                                alt="Prime Property Real Estate">
+                        </div>
+                        <div class="project-info">
+                            <h3>Prime Property</h3>
+                            <p>Prime Property is a real estate website that helps users find their dream home. It
+                                features a modern UI, responsive design, and easy navigation.</p>
+                            <div class="tech-stack"><span>HTML</span><span>CSS</span><span>JS</span></div>
+                            <div class="project-links"
+                                style="display: flex; gap: 0.8rem; margin-top: 1.2rem; justify-content: flex-start;">
+                                <a href="projects/prime-property/newindex.html" target="_blank" class="btn btn-outline"
+                                    style="padding: 0.3rem 0.6rem; font-size: 0.7rem; justify-content: center; display: flex; align-items: center; gap: 5px; white-space: nowrap;">
+                                    <i class="fas fa-folder-open"></i> Open Project
+                                </a>
+                                <a href="https://github.com/BhavikNakum9" target="_blank" class="btn btn-outline"
+                                    style="padding: 0.3rem 0.6rem; font-size: 0.7rem; justify-content: center; display: flex; align-items: center; gap: 5px; background: rgba(0, 242, 255, 0.05); white-space: nowrap;">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="glass-card project-card" style="position: relative;" data-tilt data-tilt-max="10"
+                        data-tilt-speed="400" data-tilt-perspective="1000">
+                        <span class="upcoming-badge">In Progress</span>
+                        <div class="project-img-wrapper">
+                            <img src="project2.png" alt="Student Management App Dashboard">
+                        </div>
+                        <div class="project-info">
+                            <h3>Student Management App</h3>
+                            <p>An exciting new project is currently in development. Stay tuned for updates and feature
+                                announcements!</p>
+                            <div class="tech-stack"><span>Flutter</span><span>Dart</span></div>
+                            <div class="project-links">
+                                <a href="#" class="project-link" style="pointer-events: none; opacity: 0.5;"><i
+                                        class="fas fa-lock"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+        <section id="education" class="section">
+            <div class="container">
+                <h2 class="section-title">Education</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content glass-card" data-tilt data-tilt-max="5" data-tilt-speed="400"
+                            data-tilt-perspective="1000">
+                            <div class="education-header">
+                                <i class="fas fa-graduation-cap education-icon"></i>
+                                <div class="education-title-group">
+                                    <h3>Bachelor of Engineering – Computer Engineering</h3>
+                                    <span class="education-year"><i class="fas fa-calendar-alt"></i> 2023 – 2027</span>
+                                </div>
+                            </div>
+                            <div class="institution-name">
+                                <i class="fas fa-university"></i> V.V.P Engineering College
+                            </div>
+                            <div class="education-details">
+                                <p><i class="fas fa-chart-bar"></i> CGPA: 6.78 / 10</p>
+                                <p><i class="fas fa-map-marker-alt"></i> Rajkot, Gujarat</p>
+                            </div>
+                            <div class="education-desc">
+                                <p><i class="fas fa-laptop-code"></i> Deepened expertise in Data Structures, Algorithms,
+                                    and Software Architecture. Actively built scalable web and mobile applications,
+                                    demonstrating strong problem-solving capabilities and a passion for modern
+                                    development paradigms.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content glass-card">
+                            <div class="education-header">
+                                <i class="fas fa-graduation-cap education-icon"></i>
+                                <div class="education-title-group">
+                                    <h3>12th Board – GSEB (Science)</h3>
+                                    <span class="education-year"><i class="fas fa-calendar-alt"></i> 2021 – 2023</span>
+                                </div>
+                            </div>
+                            <div class="institution-name">
+                                <i class="fas fa-school"></i> Shree Swaminarayan Gurukul Vidhyalay
+                            </div>
+                            <div class="education-details">
+                                <p><i class="fas fa-chart-line"></i> Percentage: 73% / 100%</p>
+                                <p><i class="fas fa-map-marker-alt"></i> Rajkot, Gujarat</p>
+                            </div>
+                            <div class="education-desc">
+                                <p><i class="fas fa-microscope"></i> Specialized in Physics, Chemistry, and Advanced
+                                    Mathematics. Cultivated rigorous analytical thinking and logical reasoning skills,
+                                    establishing a robust foundation for tackling complex software engineering
+                                    challenges.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content glass-card">
+                            <div class="education-header">
+                                <i class="fas fa-graduation-cap education-icon"></i>
+                                <div class="education-title-group">
+                                    <h3>10th Board – GSEB</h3>
+                                    <span class="education-year"><i class="fas fa-calendar-alt"></i> 2019 – 2021</span>
+                                </div>
+                            </div>
+                            <div class="institution-name">
+                                <i class="fas fa-school"></i> Shree Swaminarayan Gurukul Vidhyalay
+                            </div>
+                            <div class="education-details">
+                                <p><i class="fas fa-chart-line"></i> Percentage: 89% / 100%</p>
+                                <p><i class="fas fa-map-marker-alt"></i> Junagadh, Gujarat</p>
+                            </div>
+                            <div class="education-desc">
+                                <p><i class="fas fa-book-reader"></i> Graduated with high academic distinction.
+                                    Developed an early aptitude for mathematics and systematic problem-solving, driving
+                                    a lifelong passion for technology and continuous learning.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Declaration Section -->
+        <section id="declaration" class="section declaration-section">
+            <div class="container">
+                <div class="declaration-box">
+                    <div class="declaration-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="declaration-content">
+                        <h4>DECLARATION</h4>
+                        <p>"I hereby declare that all the information and details provided in this portfolio are true,
+                            accurate, and correct to the best of my knowledge and belief."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p><a href="tel:+919429587425" class="contact-link">+91 94295 87425</a></p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p><a href="mailto:nakumbhavik2005@gmail.com"
+                                        class="contact-link">nakumbhavik2005@gmail.com</a></p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Location</h4>
+                                <p><a href="https://www.google.com/maps/search/?api=1&query=Shree+Swaminarayan+Gurukul+Rajkot+Sansthan+Dhebar+Road+Rajkot"
+                                        target="_blank" class="contact-link">Shree Swaminarayan Gurukul, Dhebar Road,
+                                        Rajkot</a></p>
+                            </div>
+                        </div>
+
+                        <!-- Google Map Embed -->
+                        <div class="map-container glass-card" data-tilt data-tilt-max="5" data-tilt-speed="400"
+                            data-tilt-perspective="1000">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.8016405786324!2d70.7981313753367!3d22.285514079698517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959ca1877f6b4f7%3A0x8898991206c8b919!2sShree%20Swaminarayan%20Gurukul%20Rajkot%20Sansthan!5e0!3m2!1sen!2sin!4v1710715000000!5m2!1sen!2sin"
+                                width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+
+                    </div>
+                    <form id="portfolio-contact-form" class="contact-form glass-card" data-tilt data-tilt-max="5"
+                        data-tilt-speed="400" data-tilt-perspective="1000">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="contact-message" name="message" placeholder="Your Message" rows="5"
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 send-btn">
+                            <span class="btn-text">Send Message</span>
+                            <i class="fas fa-paper-plane btn-icon"></i>
+                        </button>
+                        <div id="form-status" class="form-status"></div>
+                    </form>
+                </div>
+                <div class="social-links-container">
+                    <div class="social-links">
+                        <a href="https://github.com/BhavikNakum9" target="_blank" title="GitHub"
+                            class="social-icon-btn github">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/bhavik-nakum-96a951290/" target="_blank" title="LinkedIn"
+                            class="social-icon-btn linkedin">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-copyright">
+                        <p>&copy; 2026 Bhavik Nakum. All Rights Reserved.</p>
+                        <p class="built-with">Built with <span style="color: var(--neon-cyan);">HTML, CSS,
+                                JavaScript</span></p>
+                    </div>
+                    <div class="footer-policies">
+                        <a href="#">Privacy Policy</a>
+                        <span class="separator">|</span>
+                        <a href="#">Terms of Service</a>
+                        <span class="separator">|</span>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </footer>
+        </section>
+    </main>
+
+    <!-- Floating Theme Toggle -->
+    <div class="floating-theme-btn" id="theme-btn" title="Toggle Light/Dark Mode">
+        <i class="fas fa-sun"></i>
+    </div>
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

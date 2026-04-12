@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Property | Premium Real Estate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/invoice.css">
+</head>
+
+<body>
+
+    <!-- Splash Screen -->
+    <div class="splash-screen" id="splash-screen">
+        <div class="splash-logo">
+            <i class="fas fa-home"></i> PRIME
+        </div>
+        <div class="splash-loader">
+            <div class="splash-progress"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo">PRIME</a>
+            <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#properties">Properties</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+
+                <!-- Auth State: Logged Out -->
+                <li id="auth-default" class="auth-buttons">
+                    <button class="btn btn-outline" onclick="toggleForm('signin-public')">Sign In</button>
+                    <button class="btn btn-primary" onclick="toggleForm('signup-public')">Sign Up</button>
+                </li>
+
+                <!-- Auth State: Logged In -->
+                <li id="user-profile" class="user-profile" style="display: none;">
+                    <button class="btn btn-outline" onclick="openDashboard()">
+                        <div class="user-avatar">JD</div>
+                        <span id="user-name">John Doe</span>
+                    </button>
+                    <button class="btn btn-outline" style="padding: 0.5rem; border: none;" onclick="handleLogout()"
+                        title="Logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-slider" id="hero-slider"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Find Your Dream Home</h1>
+            <p>Discover premium properties in prime locations. Luxury living redefined.</p>
+
+            <form class="search-form" onsubmit="handleSearch(event)">
+                <div class="form-group">
+                    <input type="text" class="search-input" id="search-text"
+                        placeholder="Search by locality, project...">
+                </div>
+                <div class="form-group">
+                    <select class="search-select" id="search-type">
+                        <option value="all">Property Type</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="villa">Villa</option>
+                        <option value="commercial">Commercial</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="search-select" id="search-budget">
+                        <option value="">Budget</option>
+                        <option value="50-100">₹50L - ₹1Cr</option>
+                        <option value="100-200">₹1Cr - ₹2Cr</option>
+                        <option value="200+">₹2Cr+</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Featured Properties -->
+    <section class="container" id="properties">
+        <h2 class="section-title">Featured Properties</h2>
+
+        <div class="filter-section">
+            <div class="filter-controls">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="apartment">Apartments</button>
+                <button class="filter-btn" data-filter="villa">Villas</button>
+                <button class="filter-btn" data-filter="commercial">Commercial</button>
+            </div>
+        </div>
+
+        <div class="properties-grid" id="properties-grid">
+            <!-- Populated by JS -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container about-content">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="About Prime">
+            </div>
+            <div class="about-text">
+                <h2>Why Choose Prime?</h2>
+                <p>We connect you with the most exclusive properties in the market. Our curated listings ensure quality,
+                    luxury, and value for your investment.</p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Happy Families</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Cities</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Verified Listings</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="container comparison-section">
+        <div class="comparison-header">
+            <h2>Compare Properties</h2>
+            <button class="btn btn-outline" id="clear-comparison-btn">Clear All</button>
+        </div>
+        <div class="comparison-grid">
+            <table class="comparison-table" id="comparison-table">
+                <thead>
+                    <tr id="comparison-header-row">
+                        <th style="width: 20%;">Feature</th>
+                        <!-- Dynamic headers will be injected here -->
+                    </tr>
+                </thead>
+                <tbody id="comparison-body">
+                    <tr class="empty-comparison">
+                        <td colspan="5">Add up to 4 properties to compare features, price, and rating.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="comparison-recommendation"></div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container comparison-header" style="justify-content: center;">
+            <h2>Get In Touch</h2>
+        </div>
+        <div class="container contact-grid">
+            <form class="contact-form" id="contact-form">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea class="form-control" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+            </form>
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Prime Tower, Business District, New Delhi</p>
+                <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                <p><i class="fas fa-envelope"></i> contact@primeproperties.in</p>
+
+                <div style="margin-top: 2rem;">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>PRIME</h3>
+                    <p>Your trusted partner in finding the perfect home.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#properties">Properties</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Properties</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Apartments</a></li>
+                        <li><a href="#">Villas</a></li>
+                        <li><a href="#">Commercial</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Subscribe</h3>
+                    <p>Get the latest updates on new listings.</p>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <input type="email" placeholder="Email"
+                            style="padding: 0.5rem; border-radius: 4px; border: none; flex: 1;">
+                        <button class="btn btn-primary" style="padding: 0.5rem 1rem;">Go</button>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2024 Prime Properties. All rights reserved. | <a href="#" onclick="toggleForm('signin-admin')"
+                    style="color: #64748b; text-decoration: none;">Admin Access</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+
+    <!-- Public Sign In Modal -->
+    <div class="modal-overlay" id="signin-public-modal" style="z-index: 3000;">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2>Welcome Back</h2>
+                <button class="close-modal" onclick="closeAuthModals()">&times;</button>
+            </div>
+            <form onsubmit="handlePublicLogin(event)">
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="login-public-phone" class="form-control" placeholder="+91 XXXXX XXXXX"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="login-public-password" class="form-control" required>
+                </div>
+                <div style="text-align: right; margin-bottom: 1rem;">
+                    <a href="#" onclick="openResetModal()"
+                        style="font-size: 0.9rem; color: var(--secondary-color);">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem;">
+                New here? <a href="#" onclick="toggleForm('signup-public')"
+                    style="color: var(--secondary-color);">Create Account</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Public Sign Up Modal -->
+    <div class="modal-overlay" id="signup-public-modal" style="z-index: 3000;">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2>Create Account</h2>
+                <button class="close-modal" onclick="closeAuthModals()">&times;</button>
+            </div>
+            <form onsubmit="handlePublicSignup(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="signup-public-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="signup-public-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="signup-public-phone" class="form-control" placeholder="+91" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signup-public-password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem;">
+                Already have an account? <a href="#" onclick="toggleForm('signin-public')"
+                    style="color: var(--secondary-color);">Sign In</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Admin Sign In Modal -->
+    <div class="modal-overlay" id="signin-admin-modal" style="z-index: 3000;">
+        <div class="modal" style="max-width: 400px; border-top: 4px solid var(--primary-color);">
+            <div class="modal-header">
+                <h2>Admin Login</h2>
+                <button class="close-modal" onclick="closeAuthModals()">&times;</button>
+            </div>
+            <form onsubmit="handleAdminLogin(event)">
+                <div class="form-group">
+                    <label>Admin Email</label>
+                    <input type="email" id="login-admin-email" class="form-control" placeholder="admin@prime.in"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="login-admin-password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Access Dashboard</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem;">
+                Register as Admin? <a href="#" onclick="toggleForm('signup-admin')"
+                    style="color: var(--secondary-color);">Click here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Admin Sign Up Modal -->
+    <div class="modal-overlay" id="signup-admin-modal" style="z-index: 3000;">
+        <div class="modal" style="max-width: 400px; border-top: 4px solid var(--primary-color);">
+            <div class="modal-header">
+                <h2>Admin Registration</h2>
+                <button class="close-modal" onclick="closeAuthModals()">&times;</button>
+            </div>
+            <form onsubmit="handleAdminSignup(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="signup-admin-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="signup-admin-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signup-admin-password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Secret Code</label>
+                    <input type="password" id="signup-admin-secret" class="form-control"
+                        placeholder="Required for Admin Access" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Register Admin</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem;">
+                <a href="#" onclick="toggleForm('signin-admin')" style="color: var(--secondary-color);">Back to
+                    Login</a>
+            </p>
+        </div>
+    </div>
+
+
+
+    <!-- Payment Modal -->
+    <div class="modal-overlay" id="payment-modal" style="z-index: 3100;">
+        <div class="modal" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2>Secure Booking</h2>
+                <button class="close-modal" onclick="closePaymentModal()">&times;</button>
+            </div>
+
+            <div class="payment-summary" id="payment-summary-content">
+                <!-- Populated by JS -->
+            </div>
+
+            <h4 style="margin-bottom: 1rem;">Select Payment Method</h4>
+            <div class="payment-methods">
+                <div class="payment-method-card active" onclick="selectPaymentMethod('card')">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Card</span>
+                </div>
+                <div class="payment-method-card" onclick="selectPaymentMethod('upi')">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>UPI</span>
+                </div>
+                <div class="payment-method-card" onclick="selectPaymentMethod('bank')">
+                    <i class="fas fa-university"></i>
+                    <span>Net Banking</span>
+                </div>
+            </div>
+
+            <form onsubmit="handlePaymentSubmit(event)">
+                <div id="card-payment-fields">
+                    <div class="form-group">
+                        <label>Card Number</label>
+                        <div style="position: relative;">
+                            <input type="text" class="form-control" placeholder="0000 0000 0000 0000" maxlength="19"
+                                required>
+                            <div class="card-icons"
+                                style="position: absolute; right: 10px; top: 10px; font-size: 1.2rem;">
+                                <i class="fab fa-cc-visa"></i> <i class="fab fa-cc-mastercard"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>Expiry</label>
+                            <input type="text" class="form-control" placeholder="MM/YY" maxlength="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label>CVV</label>
+                            <input type="password" class="form-control" placeholder="123" maxlength="3" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="upi-payment-fields" style="display: none;">
+                    <div style="text-align: center; margin-bottom: 1rem;">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=PrimePropertiesPayment"
+                            alt="UPI QR" style="border: 1px solid #ddd; padding: 0.5rem; border-radius: 8px;">
+                        <p style="font-size: 0.8rem; color: #64748b; margin-top: 0.5rem;">Scan to Pay</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Or Enter UPI ID</label>
+                        <input type="text" id="upi-id-input" class="form-control" placeholder="username@upi">
+                    </div>
+                </div>
+
+                <div id="bank-payment-fields" style="display: none;">
+                    <div class="form-group">
+                        <label>Select Bank</label>
+                        <select class="form-control" id="bank-select">
+                            <option value="">-- Choose Your Bank --</option>
+                            <option value="sbi">State Bank of India</option>
+                            <option value="hdfc">HDFC Bank</option>
+                            <option value="icici">ICICI Bank</option>
+                            <option value="axis">Axis Bank</option>
+                            <option value="kotak">Kotak Mahindra Bank</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Account Holder Name</label>
+                        <input type="text" id="bank-user-name" class="form-control"
+                            placeholder="Name as per Bank Records">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;"
+                    id="btn-pay-confirm">
+                    <i class="fas fa-lock"></i> Confirm Booking
+                </button>
+            </form>
+
+            <p style="text-align: center; margin-top: 1rem; font-size: 0.8rem; color: var(--text-light);">
+                <i class="fas fa-shield-alt"></i> 100% Secure Transaction
+            </p>
+        </div>
+    </div>
+
+    <!-- Reset Password Modal -->
+    <div class="modal-overlay" id="reset-modal" style="z-index: 3100;">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2>Reset Password</h2>
+                <button class="close-modal" onclick="closeResetModal()">&times;</button>
+            </div>
+            <form onsubmit="handleResetPassword(event)">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="reset-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>New Password</label>
+                    <input type="password" id="reset-new-pass" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="reset-confirm-pass" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Update Password</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Locality 3D Modal -->
+    <div class="modal-overlay" id="locality-modal">
+        <div class="modal" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2 id="modal-title">Locality View</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div id="modal-content">
+                <!-- Dynamic Content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- User Dashboard Modal -->
+    <div class="modal-overlay" id="dashboard-modal" style="z-index: 2500;">
+        <div class="modal" style="max-width: 1000px; width: 95%; padding: 0;">
+            <div class="dashboard-container">
+                <!-- Sidebar -->
+                <div class="dashboard-sidebar">
+                    <div
+                        style="text-align: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                        <div class="profile-avatar-large" id="dashboard-avatar"
+                            style="width: 80px; height: 80px; margin: 0 auto 10px; font-size: 2rem;">
+                            <!-- Initials or Image -->
+                        </div>
+                        <h3 id="dashboard-name-display" style="font-size: 1.1rem; margin-bottom: 0.25rem;">User Name
+                        </h3>
+                        <p id="dashboard-email-display" style="font-size: 0.85rem; color: var(--text-light);">
+                            user@example.com</p>
+                    </div>
+
+                    <button class="dashboard-tab active" onclick="switchTab('profile')">
+                        <i class="fas fa-user-circle"></i> My Profile
+                    </button>
+                    <button class="dashboard-tab" onclick="switchTab('bookings')">
+                        <i class="fas fa-calendar-check"></i> My Bookings
+                    </button>
+                    <button class="dashboard-tab" id="admin-users-tab" onclick="switchTab('admin-users')"
+                        style="display: none;">
+                        <i class="fas fa-users-cog"></i> Manage Users
+                    </button>
+                    <button class="dashboard-tab" id="admin-bookings-tab" onclick="switchTab('admin-bookings')"
+                        style="display: none;">
+                        <i class="fas fa-file-invoice-dollar"></i> All Transactions
+                    </button>
+
+                    <button class="dashboard-tab" onclick="closeDashboard()" style="margin-top: auto; color: #ef4444;">
+                        <i class="fas fa-times"></i> Close Dashboard
+                    </button>
+                </div>
+
+                <!-- Content Area -->
+                <div class="dashboard-content">
+                    <div id="dynamic-tab-title"
+                        style="margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                        <h3>My Profile</h3>
+                    </div>
+
+                    <!-- Profile Panel -->
+                    <div id="tab-profile" class="dashboard-panel active">
+                        <form onsubmit="handleProfileUpdate(event)">
+                            <div class="form-grid">
+                                <div class="form-group full-width">
+                                    <label>Profile Picture</label>
+                                    <div style="display: flex; gap: 1rem; align-items: center;">
+                                        <input type="file" accept="image/*" onchange="handleAvatarUpload(event)"
+                                            class="form-control" style="width: auto;">
+                                        <small class="text-light">Max 2MB, JPG/PNG</small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" id="edit-name" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="text" id="edit-phone" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" id="edit-city" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input type="text" id="edit-address" class="form-control">
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Bio</label>
+                                    <textarea id="edit-bio" class="form-control" rows="3"
+                                        placeholder="Tell us about yourself..."></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="margin-top: 1.5rem;">Save
+                                Changes</button>
+                        </form>
+                    </div>
+
+                    <!-- Bookings Panel -->
+                    <div id="tab-bookings" class="dashboard-panel">
+
+                        <div id="dashboard-bookings-list" class="bookings-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Admin Users Panel -->
+                    <div id="tab-admin-users" class="dashboard-panel">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: #f1f5f9; text-align: left;">
+                                    <th style="padding: 10px;">User</th>
+                                    <th style="padding: 10px;">Email</th>
+                                    <th style="padding: 10px;">Status</th>
+                                    <th style="padding: 10px;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-users-list">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Admin Bookings Panel -->
+                    <div id="tab-admin-bookings" class="dashboard-panel">
+                        <div id="admin-all-bookings-list" class="bookings-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/ai-chat.js"></script>
+
+</body>
+
+</html>
